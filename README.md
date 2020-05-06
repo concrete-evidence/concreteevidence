@@ -1,5 +1,7 @@
 # Concrete Evidence
 
+This is the repo for the Concrete Evidence concrete hardness assessment device.
+
 # getframe.py
 
 Useful for testing the camera, returns a single set of raw data from the Lepton.
