@@ -6,13 +6,13 @@ from flirpy.camera.lepton import Lepton
 from time import sleep
 
 ## INPUT Parameters
-E = 44500                                   ## Activation Energy
-kg = 2.0  # Rate Constant (Needs to be calibrated)
-q  = 6/7  # Kinetics Order (Needs to be calibrated)
+E  = 44500 # Activation Energy
+kg = 2.0   # Rate Constant (Needs to be calibrated)
+q  = 6/7   # Kinetics Order (Needs to be calibrated)
 
-dt = 15.0   ## Time interval between frames (seconds) 
-t = 0.0     ## Initial physical time (hours)
-te = t      ## Intiial equivalent age (hours)
+dt = 15.0  # Time interval between frames (seconds) 
+t  = 0.0   # Initial physical time (hours)
+te = t     # Intiial equivalent age (hours)
 
 while(True):
 
