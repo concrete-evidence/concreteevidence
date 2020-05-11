@@ -14,6 +14,7 @@ dt = 15.0  # Time interval between frames (seconds)
 t  = 0.0   # Initial physical time (hours)
 te = t     # Intiial equivalent age (hours)
 
+## Data Acquisition and Processing (degee K to PSI)
 while(True):
 
 	tempsK = getRawData(0) / 100 # Capture frame of temperatures in K
