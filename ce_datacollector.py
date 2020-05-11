@@ -16,18 +16,21 @@ te = t     # Intiial equivalent age (hours)
 
 ## Data Acquisition and Processing (degee K to PSI)
 while(True):
-
+	
+	## Measurement of Temperature
 	tempsK = getRawData(0) / 100 # Capture frame of temperatures in K
+	
+	## Convert to PSI
 	dte = np.exp(-E/8.314*(1/T1 - 1/Tref))*(dt/3600)  ## Unit: hours
     	te += dte
 	t  += dt
     	P   = (kg * (1-q) * te)**(1/(1-q)) ## Unit: PSI
-
+	
+	## Display PSI
     	cv2.imshow('PSI View', P)
     	cv2.waitKey(1)
-    	sleep(dt)
-	
-	sleep(15) # Wait for a number of seconds between frames
+    		
+	sleep(dt) # Wait for a number of seconds between frames
 
     if cv2.waitKey(1) & 0xFF == ord('q'): # If 'q' key pressed
 	savetxt('P.csv', data, delimiter=',')
