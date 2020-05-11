@@ -1,6 +1,6 @@
 # Concrete Evidence
 
-This is the repo for the Concrete Evidence concrete hardness assessment device.
+This is the repo for the Concrete Evidence concrete hardness assessment device.  [The progress of the development is updated.](https://trello.com/b/GEWdTmKq/concrete-evidence)
 
 # getframe.py
 
