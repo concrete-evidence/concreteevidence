@@ -3,7 +3,7 @@
 This is the repo for the Concrete Evidence concrete hardness assessment device.  
 [Click here to go to our Trello board for project updates and tasks.](https://trello.com/b/GEWdTmKq/concrete-evidence)
 
-## docs
+## doc
 
 Documentation for the project.
 
