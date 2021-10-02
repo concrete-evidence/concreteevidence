@@ -8,6 +8,13 @@ import time
 from time import sleep
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
+import csv
+
+try:
+    indexfile = open('data_index.txt','r')
+    dindex = int(indexfile.read())
+except:
+    print('Could not initialize data index')
 
 
 '''SPI Setup for ADC'''
@@ -37,34 +44,42 @@ elif (SPI_TYPE == 'SW'):
 
 '''Data Collection'''
 NumInputs = 6 # Number of sensors attached to ADC
-aread = {}
-images = {}
 
-for i in range(NumInputs):
-    aread[i] = np.array([])
+aread = pd.DataFrame(np.zeros([1,NumInputs+2]),columns = [i for i in range(NumInputs+2)])
 
 try:
     while True:
-        for i in range(NumInputs):
-            data = mcp.read_adc(i) # read from ADC port i
-            print('Analog data on port'+str(i)+':',str(data))
-            aread[i] = np.append(aread[i],data) 
-            
+        
         # Set up the Lepton thermal camera and take an image
         camera = Lepton()
         image = camera.grab() # Grab frame from camera 0
         print('Capture from FLIR Lepton thermal camera:')
         print(image)
-        plt.imshow(image)
-        
-        images = np.append(images,image)
-        
+       
         camera.close()
-            
-        sleep(10)
+
+        pd.DataFrame(image).to_csv("Image_"+str(dindex)+'.csv')
+        
+        for i in range(2,NumInputs+2):
+            data = mcp.read_adc(i) # read from ADC port i
+            print('Analog data on port'+str(i)+':',str(data))
+            aread[i] = data
+        aread[0] = dindex
+        aread[1] = time.time()
+        
+        aread.to_csv('thermistor_data.csv', mode='a', header=False, index=False)
+        
+
+
+        # Write new index to txt file
+        indexfile = open('data_index.txt','w')
+        dindex+=1
+        indexfile.write(str(dindex))
+        indexfile.close()
+        
+        sleep(1) # Wait 1 minute      
+        
 except KeyboardInterrupt:
-    tstring = time.strftime("%H%M-%d-%m-%Y")
-    pd.DataFrame(aread).to_excel("ThermistorData+"+tstring+".xlsx") 
     sys.exit()
     
             
